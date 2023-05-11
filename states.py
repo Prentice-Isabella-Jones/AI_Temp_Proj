@@ -1,7 +1,7 @@
 """Used for defining states"""
 
 
-class States:
+class MDPStates:
 
     def __int__(self, state):
         self.state = state

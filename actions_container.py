@@ -1,10 +1,10 @@
 """This is a container for actions"""
 
 
-from actions import Actions
+from actions import MDPActions
 
 
-class Actions_Cont(Actions):
+class MDPActions_Container(MDPActions):
     def __init__(self, name: str, prob: float):
         super().__init__(name, prob)
         self.actions = None

@@ -1,9 +1,9 @@
 """This is a container for states"""
 
-from states import States
+from states import MDPStates
 
 
-class States_Cont(States):
+class MDPStates_Container(MDPStates):
     def __init__(self):
         self.states = None
 
