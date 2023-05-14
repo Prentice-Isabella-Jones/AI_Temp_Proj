@@ -1,7 +1,9 @@
+"""To be able to calculate different value iterations using the Bellman Equation"""
 
+from heating_probabilities import heat_off, heat_on
 class BellmanEquation:
     @staticmethod
-    def bellman_equation(cost_on, cost_off, heat_on, heat_off, iteratn, values):
+    def bellman_equation(cost_on, cost_off, iteratn, values):
         #V(end_state) = min(c(action) + sum(P(initial_state|end_state, action) * V(initial_state))
 
         value_on = cost_on + (heat_on["falling by 0.5"] * values[iteratn - 1] + heat_on["no change"] * values[iteratn] +
@@ -33,7 +35,7 @@ class BellmanEquation:
                 #no rising
 
             else:
-                BellmanEquation.bellman_equation(3, .01, heat_on, heat_off, i, values)
+                BellmanEquation.bellman_equation(3, .01, i, values)
 
         return values
 
