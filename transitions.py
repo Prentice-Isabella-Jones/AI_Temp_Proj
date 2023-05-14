@@ -8,6 +8,9 @@ class MDPTranstion:
 
     def get_probability(number: str) -> str:
         if (m := re.match(r'',number)):
+            print(m.group('prob'))
+
+
 
 
 
