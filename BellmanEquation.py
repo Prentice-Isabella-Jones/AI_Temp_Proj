@@ -26,7 +26,7 @@ class BellmanEquation:
                         values.append(0)
                     if state == 17:
                         val_on = (costs["on"] + .1 * val[i - 1][state - 1] + .2 * val[i - 1][state] + .7 * val[i - 1][state + 1])
-                        val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i - 1][state - 1] + heat_off["no change"] * val[i - 1][state] + heat_off["rising by 0.5"] * val[i - 1][state + 1])
+                        val_off = (costs["off"] + .7*val[i - 1][state - 1] + heat_off["no change"] * val[i - 1][state] + heat_off["rising by 0.5"] * val[i - 1][state + 1])
                         min_val = min(val_on, val_off)
                         values.append(min_val)
                     if state == 18:
