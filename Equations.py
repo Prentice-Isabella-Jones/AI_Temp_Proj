@@ -60,9 +60,9 @@ class BellmanEquation:
         for state in range(len(list_of_states)):
 
             if state == 0:
-                opt_val_on = (3 + .3 * result_list[state] + .5 * (result_list[state + 1]) + .2 *
+                opt_val_on = (costs["on"] + .3 * result_list[state] + .5 * (result_list[state + 1]) + .2 *
                               (result_list[state + 2]))
-                opt_val_off = (.01 + .9 * result_list[state] + .1 * (result_list[state + 1]))
+                opt_val_off = (costs["off"] + .9 * result_list[state] + .1 * (result_list[state + 1]))
                 opt_min_val = min(opt_val_on, opt_val_off)
                 if opt_min_val == opt_val_on:
                     optimal_min_values.append(str(list_of_states[state]) + " OP is ON")
@@ -71,26 +71,26 @@ class BellmanEquation:
             elif state == 12:
                 optimal_min_values.append(" OP is ON OR OFF")
             elif state == 17:
-                opt_val_on = (3 + .1 * result_list[state-1] + .2 * result_list[state] + .7 *
+                opt_val_on = (costs["on"] + .1 * result_list[state-1] + .2 * result_list[state] + .7 *
                               result_list[state + 1])
-                opt_val_off = (.01 + .7 * result_list[state - 1] + .2 * result_list[state] + .5 * result_list[state + 1])
+                opt_val_off = (costs["off"] + .7 * result_list[state - 1] + .2 * result_list[state] + .5 * result_list[state + 1])
                 opt_min_val = min(opt_val_on, opt_val_off)
                 if opt_min_val == opt_val_on:
                     optimal_min_values.append(str(list_of_states[state]) + " OP is ON")
                 else:
                     optimal_min_values.append(str(list_of_states[state]) + " OP is OFF")
             elif state == 18:
-                opt_val_on = (3 + .1 * result_list[state - 1] + .9 * result_list[state])
-                opt_val_off = (.01 + .7 * result_list[state - 1] + .3 * result_list[state])
+                opt_val_on = (costs["on"] + .1 * result_list[state - 1] + .9 * result_list[state])
+                opt_val_off = (costs["off"] + .7 * result_list[state - 1] + .3 * result_list[state])
                 opt_min_val = min(opt_val_on, opt_val_off)
                 if opt_min_val == opt_val_on:
                     optimal_min_values.append(str(list_of_states[state]) + " OP is ON")
                 else:
                     optimal_min_values.append(str(list_of_states[state]) + " OP is OFF")
             else:
-                opt_val_on = (3 + .1 * result_list[state - 1] + .2 * result_list[state] + .5 * result_list[state + 1] +
+                opt_val_on = (costs["on"] + .1 * result_list[state - 1] + .2 * result_list[state] + .5 * result_list[state + 1] +
                               .2 * result_list[state + 2])
-                opt_val_off = (.01 + .7 * result_list[state - 1] + .2 * result_list[state] + .1 * result_list[state + 1])
+                opt_val_off = (costs["off"] + .7 * result_list[state - 1] + .2 * result_list[state] + .1 * result_list[state + 1])
                 opt_min_val = min(opt_val_on, opt_val_off)
                 if opt_min_val == opt_val_on:
                     optimal_min_values.append(str(list_of_states[state]) + " OP is ON")
