@@ -35,8 +35,8 @@ class BellmanEquation:
                         min_val = min(val_on, val_off)
                         values.append(min_val)
                     else:
-                        val_on = (costs["on"] + heat_on["falling by 0.5"] * val[i-1][state - 1] + heat_on["no change"] * val[i-1][state] + heat_on["rising by 0.5"] * val[i-1][state + 1] + heat_on["rising by 1"] * val[i-1][state+2])
-                        val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i-1][state - 1] + heat_off["no change"] * val[i-1][state] + heat_off["rising by 0.5"] * val[i-1][state + 1])
+                        val_on = (costs["on"] + heat_on["falling by 0.5"] * val[i-1][state - 1] + heat_on["no change"] * val[i-1][state] + heat_on["rising by 0.5"]*val[i-1][state+1] + heat_on["rising by 1"] * val[i-1][state+2])
+                        val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i-1][state - 1] + heat_off["no change"] * val[i-1][state] + heat_off["rising by 0.5"]*val[i-1][state + 1])
                         min_val = min(val_on, val_off)
                         values.append(min_val)
                 val[i] = values
