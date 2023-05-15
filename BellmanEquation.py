@@ -54,7 +54,11 @@ def optimal_policy():
     list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
     result = bellman_equation()
     result_list = result[49]
-    print(result_list)
+    optimal_pol = []
+    for state in range(len(list_of_states)):
+
+    print(optimal_pol)
+    return optimal_pol
 
 
 class FindOptimalPolicy:
