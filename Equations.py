@@ -4,14 +4,15 @@ import Equations
 
 
 class BellmanEquation:
-    def bellman_equation():
+    #@staticmethod
+    def bellman_equation(list_of_states, number_of_iterations, costs):
         heat_on = {"rising by 0.5": .5, "rising by 1": .2, "no change": .2, "falling by 0.5": .1}
         heat_off = {"rising by 0.5": .1, "falling by 0.5": .7, "no change": .2}
-        list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
-        number_of_iterations = 5000
+        #list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
+        #number_of_iterations = 5000
             #val = {0: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
         val = {}
-        costs = {"on": 3, "off": .01}
+        #costs = {"on": 3, "off": .01}
         for i in range(number_of_iterations):
             if i == 0:
                 val[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -45,9 +46,11 @@ class BellmanEquation:
                     #val[i][state] = min_val
         #pprint.pprint(val)
         return val
-    def optimal_policy():
-        list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
-        result = Equations.BellmanEquation.bellman_equation()
+    #@staticmethod
+    def optimal_policy(list_of_states, number_of_iterations, costs):
+        #list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
+        #costs = {"on": 3, "off": .01}
+        result = Equations.BellmanEquation.bellman_equation(list_of_states, number_of_iterations, costs)
         result_list = result[4999]
         # print(result_list)
         # need to pick out reocurring number from val table
@@ -99,9 +102,7 @@ class BellmanEquation:
 
 
 
-    if __name__ == "__main__":
-        #print(bellman_equation())
-        print(optimal_policy())
+
 
 
 
