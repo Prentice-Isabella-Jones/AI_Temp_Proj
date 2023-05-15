@@ -55,33 +55,40 @@ def optimal_policy():
     #print(result_list)
     # need to pick out reocurring number from val table
     # plug probabilities and num above into eq for on and off and then return the min of the two
-
+    optimal_min_values = []
+    #based on what user chooses
     for state in range(len(list_of_states)):
-                if state == 0:
-                    opt_val_on = (costs["on"] + .3 * result_list[state] + .5 * (result_list[state+1]) + .2 *
+
+        if state == 0:
+            opt_val_on = (costs["on"] + .3 * result_list[state] + .5 * (result_list[state+1]) + .2 *
                                   (result_list[state+2]))
-                    opt_val_off = (costs["off"] + .9 * result_list[state] + .1 * (result_list[state+1]))
-                    opt_min_val = min(opt_val_on, opt_val_off)
-                elif state == 12:
-                    #come back to
-                elif state == 17:
-                    opt_val_on = (costs["on"] + .1 * result_list[state+16] + .2 * result_list[state+17] + .7 *
-                                  result_list[state+18])
-                    opt_val_off = (costs["off"] + .7 * result_list[state+16] + heat_off["no change"] *
-                                   result_list[state+17] + heat_off["rising by 0.5"] * result_list[state+18])
-                    opt_min_val = min(opt_val_on, opt_val_off)
-                elif state == 18:
-                    val_on = (costs["on"] + .1 * result_list[state+17] + .9 * result_list[state+18])
-                    val_off = (costs["off"] + .7 * result_list[state+17]  + .3 * result_list[state+18])
-                    min_val = min(val_on, val_off)
-                else:
-                    opt_val_on = (costs["on"] + heat_on["falling by 0.5"] * result_list[state - 1] + heat_on[
+            opt_val_off = (costs["off"] + .9 * result_list[state] + .1 * (result_list[state+1]))
+            opt_min_val = min(opt_val_on, opt_val_off)
+            optimal_min_values.append(opt_min_val)
+        elif state == 12:
+            optimal_min_values.append(0)
+        elif state == 17:
+            opt_val_on = (costs["on"] + .1 * result_list[state] + .2 * result_list[state +1] + .7 *
+                                  result_list[state+2])
+            opt_val_off = (costs["off"] + .7 * result_list[state-1] + heat_off["no change"] *
+                                   result_list[state] + heat_off["rising by 0.5"] * result_list[state+1])
+            opt_min_val = min(opt_val_on, opt_val_off)
+            optimal_min_values.append(opt_min_val)
+        elif state == 18:
+            val_on = (costs["on"] + .1 * result_list[state-1] + .9 * result_list[state])
+            val_off = (costs["off"] + .7 * result_list[state-1]  + .3 * result_list[state])
+            min_val = min(val_on, val_off)
+            optimal_min_values.append(opt_min_val)
+        else:
+            opt_val_on = (costs["on"] + heat_on["falling by 0.5"] * result_list[state - 1] + heat_on[
                         "no change"] * result_list[state] + heat_on["rising by 0.5"] * result_list[state + 1] +
                          heat_on["rising by 1"] * result_list[state + 2])
-                    opt_val_off = (costs["off"] + heat_off["falling by 0.5"] * result_list[state - 1] + heat_off[
+            opt_val_off = (costs["off"] + heat_off["falling by 0.5"] * result_list[state - 1] + heat_off[
                         "no change"] * result_list[state] + heat_off["rising by 0.5"] * result_list[state + 1])
-                    opt_min_val = min(opt_val_on, opt_val_off)
-    return opt_min_val
+            opt_min_val = min(opt_val_on, opt_val_off)
+            optimal_min_values.append(opt_min_val)
+
+    return optimal_min_values
 
 class FindOptimalPolicy:
     if __name__ == "__main__":
