@@ -56,7 +56,7 @@ def optimal_policy():
     # need to pick out reocurring number from val table
     # plug probabilities and num above into eq for on and off and then return the min of the two
     optimal_min_values = []
-    #based on what user chooses
+    #based on what user pick
     for state in range(len(list_of_states)):
 
         if state == 0:
