@@ -4,6 +4,7 @@ from states_container import States_Cont
 #creating new states_cont obj which has list of states
 list_of_states = States_Cont()
 #heat_on and off probs will be imported to BellmanEquation.py so can call cal
+#call
 cost_on = 3
 cost_off = .01
 
