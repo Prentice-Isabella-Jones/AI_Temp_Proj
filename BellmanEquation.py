@@ -1,9 +1,6 @@
 import pprint
-
-
+from heating_probabilities import heat_on, heat_off
 def bellman_equation():
-    heat_on = {"rising by 0.5": .5, "rising by 1": .2, "no change": .2, "falling by 0.5": .1}
-    heat_off = {"rising by 0.5": .1, "falling by 0.5": .7, "no change": .2}
     list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
     number_of_iterations = 50
     # val = {0: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
@@ -59,5 +56,6 @@ def optimal_policy():
 
 class FindOptimalPolicy:
     if __name__ == "__main__":
+
         print(bellman_equation())
         print(optimal_policy())
