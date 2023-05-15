@@ -1,42 +1,50 @@
 
 class BellmanEquation:
-        #0=16, 12=22, 17=24.5, 18=25
-    def bellman_calculation(self, list_of_states, heat_on, heat_off):
-        values = []
-        cost_on = 3
-        cost_off = .01
-
-        for i in range(len(list_of_states)):
+    def bellman_equation():
+        heat_on = {"rising by 0.5": .5, "rising by 1": .2, "no change": .2, "falling by 0.5": .1}
+        heat_off = {"rising by 0.5": .1, "falling by 0.5": .7, "no change": .2}
+        list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
+        number_of_iterations = 20
+            #val = {0: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
+        val = {}
+        costs = {"on": 3, "off": .01}
+        for i in range(number_of_iterations):
             if i == 0:
-                #no falling
-                values[i] = 0
-            if i == 12:
-                #value is always = 0
-                values[list_of_states[i]] = 0
-            if i == 17:
-                #value only rises by .5
-                values[list_of_states[i]] = 0
-            if i == 18:
-                #no rising
-                values[list_of_states[i]] = 0
-
+                val[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             else:
-                value_on = cost_on + (heat_on["falling by 0.5"] * values[i - 1]
-                                      + heat_on["no change"] * values[i]
-                                      + heat_on["rising by 0.5"] * values[i + 1]
-                                      + heat_on["rising by 1"] * values[i + 2])
+                for state in range(len(list_of_states) + 1):
+                    values = []
+                    if state == 0:
+                        print(val[i-1][state])
+                        print(val[i-1][state+1])
+                        val_on = (costs["on"] + .3 * val[i - 1][state] + .5 * val[i - 1][state + 1] + .2 * val[i - 1][state + 2])
+                        val_off = (costs["off"] + .9 * val[i - 1][state] + .1 * val[i - 1][state + 1])
+                        min_val = min(val_on, val_off)
+                        values.append(min_val)
+                        print(values)
+                    if state == 12:
+                        values.append(0)
+                    if state == 17:
+                        val_on = (costs["on"] + .1 * val[i - 1][state - 1] + .2 * val[i - 1][state] + .7 * val[i - 1][state + 1])
+                        val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i - 1][state - 1] + heat_off["no change"] * val[i - 1][state] + heat_off["rising by 0.5"] * val[i - 1][state + 1])
+                        min_val = min(val_on, val_off)
+                        values.append(min_val)
+                    if state == 18:
+                        val_on = (costs["on"] + .1 * val[i - 1][state - 1] + .9 * val[i - 1][state])
+                        val_off = (costs["off"] + .7 * val[i - 1][state - 1] + .3 * val[i - 1][state])
+                        min_val = min(val_on, val_off)
+                        values.append(min_val)
+                    else:
+                        val_on = (costs["on"] + heat_on["falling by 0.5"] * val[i-1][state - 1] + heat_on["no change"] * val[i-1][state] + heat_on["rising by 0.5"] * val[i-1][state + 1] + heat_on["rising by 1"] * val[i-1][state+2])
+                        val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i-1][state - 1] + heat_off["no change"] * val[i-1][state] + heat_off["rising by 0.5"] * val[i-1][state + 1])
+                        min_val = min(val_on, val_off)
+                        values.append(min_val)
+                val[i] = values
+                    #val[i][state] = min_val
+        return val
 
-                value_off = cost_off + (
-                            heat_off["falling by 0.5"] * values[i - 1]
-                            + heat_off["no change"] * values[i]
-                            + heat_off["rising by 0.5"] * values[i + 1])
-
-                val = min(value_on, value_off)
-
-        return values
-
-
-
+    if __name__ == "__main__":
+        print(bellman_equation())
 
 
 
