@@ -5,7 +5,7 @@ def bellman_equation():
     heat_on = {"rising by 0.5": .5, "rising by 1": .2, "no change": .2, "falling by 0.5": .1}
     heat_off = {"rising by 0.5": .1, "falling by 0.5": .7, "no change": .2}
     list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
-    number_of_iterations = 50
+    number_of_iterations = 5000
     # val = {0: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
     val = {}
     costs = {"on": 3, "off": .01}
@@ -37,11 +37,8 @@ def bellman_equation():
                     min_val = min(val_on, val_off)
                     values.append(min_val)
                 else:
-                    val_on = (costs["on"] + heat_on["falling by 0.5"] * val[i - 1][state - 1] + heat_on[
-                        "no change"] * val[i - 1][state] + heat_on["rising by 0.5"] * val[i - 1][state + 1] +
-                              heat_on["rising by 1"] * val[i - 1][state + 2])
-                    val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i - 1][state - 1] + heat_off[
-                        "no change"] * val[i - 1][state] + heat_off["rising by 0.5"] * val[i - 1][state + 1])
+                    val_on = (costs["on"] + heat_on["falling by 0.5"] * val[i - 1][state - 1] + heat_on["no change"] * val[i - 1][state] + heat_on["rising by 0.5"] * val[i - 1][state + 1] + heat_on["rising by 1"] * val[i - 1][state + 2])
+                    val_off = (costs["off"] + heat_off["falling by 0.5"] * val[i - 1][state - 1] + heat_off["no change"] * val[i - 1][state] + heat_off["rising by 0.5"] * val[i - 1][state + 1])
                     min_val = min(val_on, val_off)
                     values.append(min_val)
             val[i] = values
@@ -53,11 +50,11 @@ def bellman_equation():
 def optimal_policy():
     list_of_states = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
     result = bellman_equation()
-    result_list = result[49]
+    result_list = result[19]
     optimal_pol = []
-    for state in range(len(list_of_states)):
+    #for state in range(len(list_of_states)):
 
-    print(optimal_pol)
+    #print(optimal_pol)
     return optimal_pol
 
 
